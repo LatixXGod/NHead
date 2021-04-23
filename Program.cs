@@ -1,121 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace HomeWork_2__1_1
+namespace HomeWork_2__2_2
 {
     class Program
     {
-        public class TestCase
-        {
-
-            public int d { get; set; }
-
-            public int n { get; set; }
-
-            public int Expected { get; set; }
-            public Exception ExpectedException { get; set; }
-        }
-        static void Testfunc(TestCase testCase)
-        {
-            try
+        
+        
+           public static int BinarySearch(int[] inputArray, int searchValue)
             {
-                var actual = Block(testCase.d);
-
-                if (actual == testCase.Expected)
+                int min = 0; // (1)
+                int max = inputArray.Length - 1;//(1)
+                while (min <= max)                                                       //O(N)
                 {
-                    Console.WriteLine("Валид");
-                }
-                else
-                {
-                    Console.WriteLine("Не валид");
-                }
-            }
-            catch (Exception x)
-            {
-                if (testCase.ExpectedException != null)
-                {                   
-                    Console.WriteLine("Валид");
-                }
-                else
-                {
-                    Console.WriteLine("Не валид");
-                }
-            }
-        }
-        static void Main(string[] args)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("Введите n: ");
-            var testCase1 = new TestCase()
-            {
-                n = 7,
-                Expected = 0,
-                ExpectedException = null
-            };
-
-            var testCase2 = new TestCase()
-            {
-                n = 5,
-                Expected = 0,
-                ExpectedException = null
-            };
-
-            Testfunc(testCase1);
-            Testfunc(testCase2);
-
-        }
-        static int Block(int n)
-        {
-            
-            
-              
-                int d = 0;
-                int i = 2;
-            // n = Convert.ToInt32(Console.ReadLine());
-            while (i <= n)
-                {
-                    if (i < n)
+                    int mid = (min + max) / 2;//(1)
+                    if (searchValue == inputArray[mid])                                  
                     {
-                        if (n % i == 0)
-                        {
-                            d++;
-                            i++;
-                        }
-                        else
-                        {
-                            i++;
-                        }
+                        return mid;               //(1)
                     }
-
+                    else if (searchValue < inputArray[mid])
+                    {
+                        max = mid - 1;
+                    }
                     else
                     {
-                        if (d == 0)
-                        {
-                            Console.WriteLine("Простое ");
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Не простое");
-                            break;
-
-                        }
-
+                        min = mid + 1;
                     }
-            
                 }
-                          return n;
+                return -1;          //(1)
+            }
 
 
-
-        }        
-
-
-
-
-    }      
-
+        // Асимптотическая сложность функции = O(N)
+    }
 }
-    
-
